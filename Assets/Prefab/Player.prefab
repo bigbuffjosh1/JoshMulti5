@@ -529,6 +529,8 @@ GameObject:
   - component: {fileID: 3193578198582888319}
   - component: {fileID: 8765042405860783812}
   - component: {fileID: 6652121518542459011}
+  - component: {fileID: 3255824521680186309}
+  - component: {fileID: 8667442603188165892}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -745,6 +747,44 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &3255824521680186309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152839994184158432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2ca6d032c3ce3418dc5c46012994e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  cameraPrefab: {fileID: 1802963642506761964, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
+  playerHead: {fileID: 2053464284551581684}
+--- !u!114 &8667442603188165892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152839994184158432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271a132b0d86e974fb62038a89a6b216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  move: {fileID: -225037306854522643, guid: ecb1c7f17c6ae7b46998750399e1617c, type: 3}
+  moveSpeed: 4
+  joshGravity: 35
+  cam: {fileID: 5955715727467108886, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
+  rotationSpeed: 14
+  canMove: 0
 --- !u!1 &8464289904964763989
 GameObject:
   m_ObjectHideFlags: 0
