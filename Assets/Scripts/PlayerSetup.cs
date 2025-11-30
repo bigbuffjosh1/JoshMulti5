@@ -48,6 +48,7 @@ public class PlayerSetup : NetworkBehaviour
     void HideMenuCanvas()
     {
         menuCanvas = GameObject.Find("Canvas");
-        menuCanvas.SetActive(false);
+        if(menuCanvas!=null)
+            menuCanvas.SetActive(false);
     }
 }
