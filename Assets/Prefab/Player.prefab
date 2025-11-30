@@ -383,7 +383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8763173499093561826
 Transform:
   m_ObjectHideFlags: 0
@@ -784,7 +784,6 @@ MonoBehaviour:
   joshGravity: 35
   cam: {fileID: 5955715727467108886, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
   rotationSpeed: 14
-  canMove: 0
 --- !u!1 &8464289904964763989
 GameObject:
   m_ObjectHideFlags: 0
