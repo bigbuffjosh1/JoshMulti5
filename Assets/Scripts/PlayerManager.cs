@@ -35,8 +35,10 @@ public class PlayerManager : NetworkBehaviour
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
-        if (!isLocalPlayer) return;
-        lobbyManager.UpdateLobbyText();
+        if (lobbyManager != null)
+            lobbyManager.UpdateLobbyText();
+        else
+            Debug.Log("Manager null");
     }
 
     bool CheckAllReady()
