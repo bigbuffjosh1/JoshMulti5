@@ -80,34 +80,23 @@ public class LobbyManager : NetworkBehaviour
 
     bool CheckAllReady()
     {
-        PlayerManager p1 = null;
-        PlayerManager p2 = null;
+        var players = new List<PlayerManager>();
 
-        int connectionNumber = 0;
-        foreach (var conn in NetworkClient.spawned)
+        foreach (var spawned in NetworkClient.spawned.Values)
         {
-            var playerManager = conn.Value.GetComponent<PlayerManager>();
-
-            if (playerManager == null) Debug.Log("Player manager null line lobby manager");
-
-            if (connectionNumber == 0)
-            {
-                p1 = playerManager;
-            }
-            else if (connectionNumber == 1)
-            {
-                p2 = playerManager;
-            }
-            connectionNumber++;
-
+            var pm = spawned.GetComponent<PlayerManager>();
+            if (pm != null)
+                players.Add(pm);
         }
 
-        if (p1.ready && p2.ready)
+        if (players[0].ready && players[1].ready)
         {
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     //Host Logic Start Lobby
