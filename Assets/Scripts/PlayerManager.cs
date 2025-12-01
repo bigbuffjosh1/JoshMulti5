@@ -24,8 +24,6 @@ public class PlayerManager : NetworkBehaviour
 
     public void ToggleReady()
     {
-        if (!isLocalPlayer) return;
-
         CmdToggleReady();
     }
 
@@ -37,7 +35,7 @@ public class PlayerManager : NetworkBehaviour
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
-        lobbyManager = GetComponent<PlayerSetup>().lobbyManager;
+        lobbyManager = LobbyManager.instance;
         if (lobbyManager != null)
             lobbyManager.UpdateLobbyText();
         else

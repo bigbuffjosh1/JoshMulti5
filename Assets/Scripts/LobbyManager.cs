@@ -5,6 +5,9 @@ using TMPro;
 
 public class LobbyManager : NetworkBehaviour
 {
+    public static LobbyManager instance; //singleton
+
+
     public Button ReadyButton;
     public Button StartButton;
     public Button InviteButton;
@@ -16,6 +19,18 @@ public class LobbyManager : NetworkBehaviour
 
     private PlayerManager playerManager;
     private PlayerSetup playerSetup;
+
+    public void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +54,7 @@ public class LobbyManager : NetworkBehaviour
 
     void ReadyButtonPressed()
     {
-        playerManager.ToggleReady();
+        NetworkClient.localPlayer.GetComponent<PlayerManager>().ToggleReady();
     }
 
     void StartButtonPressed()
