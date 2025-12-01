@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 6652121518542459011}
   - component: {fileID: 3255824521680186309}
   - component: {fileID: 8667442603188165892}
+  - component: {fileID: -6535087353782100780}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -784,6 +785,19 @@ MonoBehaviour:
   joshGravity: 35
   cam: {fileID: 5955715727467108886, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
   rotationSpeed: 14
+--- !u!114 &-6535087353782100780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152839994184158432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab030981bf7ec8b419d8cdc9cc955aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  ready: 0
 --- !u!1 &8464289904964763989
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,15 +13,18 @@ public class PlayerSetup : NetworkBehaviour
     {
         //Spawn in the camera prefab here!!
         GameObject cam = Instantiate(cameraPrefab);
+        cam.SetActive(false);
 
         CameraFollowPlayer(cam);
 
-        //Hide the menu canvas
-        HideMenuCanvas();
+        //Hide the menu canvas when game starts
+
+
+        //HideMenuCanvas();
         //Also Hide Cursor
-        HideCursor();
+        //HideCursor();
         //Hide the first camera in the scene
-        HideSceneCamera();
+        //HideSceneCamera();
     }
 
     void CameraFollowPlayer(GameObject cam)
