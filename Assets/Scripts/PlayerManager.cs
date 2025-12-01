@@ -36,15 +36,9 @@ public class PlayerManager : NetworkBehaviour
     void OnReadyChanged(bool oldValue, bool newValue)
     {
         if (lobbyManager != null)
-            RpcUpdateLobbyText();
+            lobbyManager.UpdateLobbyText();
         else
             Debug.Log("Manager null");
-    }
-
-    [ClientRpc]
-    void RpcUpdateLobbyText()
-    {
-        lobbyManager.UpdateLobbyText();
     }
 
     bool CheckAllReady()
