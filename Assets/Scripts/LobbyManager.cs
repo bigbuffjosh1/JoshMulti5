@@ -42,9 +42,9 @@ public class LobbyManager : NetworkBehaviour
 
     void StartButtonPressed()
     {
-        if (!playerManager.isLocalPlayer) return;
+        if (!isServer) return;
 
-        //playerManager.CmdRequestStartGame();
+        CmdRequestStartGame();
     }
 
     public void UpdateLobbyText()
@@ -79,20 +79,51 @@ public class LobbyManager : NetworkBehaviour
             p2Text.text = $"Ready: {p2.ready}";
     }
 
-    //Host Logic Start Lobby ( I know it should be in lobby manager)...
-    //[Command]
-    //public void CmdRequestStartGame()
-    //{
-    //    if (!isServer) return;
-    //    if (!CheckAllReady()) return;
+    bool CheckAllReady()
+    {
+        PlayerManager p1 = null;
+        PlayerManager p2 = null;
 
-    //    foreach (var conn in NetworkServer.connections.Values)
-    //    {
-    //        var player = conn.identity.GetComponent<PlayerSetup>();
-    //        if (player != null)
-    //        {
-    //            player.RunInGameStartPlayer(); // this should be a [ClientRpc]
-    //        }
-    //    }
-    //}
+        int connectionNumber = 0;
+        foreach (var conn in NetworkClient.spawned)
+        {
+            var playerManager = conn.Value.GetComponent<PlayerManager>();
+
+            if (playerManager == null) Debug.Log("Player manager null line lobby manager");
+
+            if (connectionNumber == 0)
+            {
+                p1 = playerManager;
+            }
+            else if (connectionNumber == 1)
+            {
+                p2 = playerManager;
+            }
+            connectionNumber++;
+
+        }
+
+        if (p1.ready && p2.ready)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    //Host Logic Start Lobby
+    [Command]
+    public void CmdRequestStartGame()
+    {
+        if (!CheckAllReady()) return;
+
+        foreach (var conn in NetworkServer.connections.Values)
+        {
+            var player = conn.identity.GetComponent<PlayerSetup>();
+            if (player != null)
+            {
+                player.RunInGameStartPlayer(); // this should be a [ClientRpc]
+            }
+        }
+    }
 }
