@@ -36,9 +36,15 @@ public class PlayerManager : NetworkBehaviour
     void OnReadyChanged(bool oldValue, bool newValue)
     {
         if (lobbyManager != null)
-            lobbyManager.UpdateLobbyText();
+            RpcUpdateLobbyText();
         else
             Debug.Log("Manager null");
+    }
+
+    [ClientRpc]
+    void RpcUpdateLobbyText()
+    {
+        lobbyManager.UpdateLobbyText();
     }
 
     bool CheckAllReady()
@@ -50,7 +56,7 @@ public class PlayerManager : NetworkBehaviour
         }
         return true;
     }
-
+    
     //Host Logic Start Lobby ( I know it should be in lobby manager)...
     [Command]
     public void CmdRequestStartGame()
