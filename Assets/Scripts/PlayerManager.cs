@@ -19,7 +19,7 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartClient()
     {
         //lobbyManager = FindFirstObjectByType<LobbyManager>();
-        lobbyManager = GetComponent<PlayerSetup>().lobbyManager;
+        //lobbyManager = GetComponent<PlayerSetup>().lobbyManager;
     }
 
     public void ToggleReady()
@@ -37,6 +37,7 @@ public class PlayerManager : NetworkBehaviour
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
+        lobbyManager = GetComponent<PlayerSetup>().lobbyManager;
         if (lobbyManager != null)
             lobbyManager.UpdateLobbyText();
         else
