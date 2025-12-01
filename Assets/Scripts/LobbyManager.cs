@@ -14,7 +14,8 @@ public class LobbyManager : NetworkBehaviour
     public TMP_Text p1Text;
     public TMP_Text p2Text;
 
-    public PlayerManager playerManager;
+    private PlayerManager playerManager;
+    private PlayerSetup playerSetup;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +34,7 @@ public class LobbyManager : NetworkBehaviour
         StartButton.onClick.AddListener(StartButtonPressed);
 
         playerManager = NetworkClient.localPlayer.GetComponent<PlayerManager>();
+        playerSetup = NetworkClient.localPlayer.GetComponent<PlayerSetup>();
     }
 
     void ReadyButtonPressed()
@@ -43,8 +45,9 @@ public class LobbyManager : NetworkBehaviour
     void StartButtonPressed()
     {
         if (!isServer) return;
-
-        CmdRequestStartGame();
+        Debug.Log("pressed 1");
+        if (!CheckAllReady()) return;
+        RpcStartGame();
     }
 
     public void UpdateLobbyText()
@@ -112,18 +115,11 @@ public class LobbyManager : NetworkBehaviour
     }
 
     //Host Logic Start Lobby
-    [Command]
-    public void CmdRequestStartGame()
+    [ClientRpc]
+    public void RpcStartGame()
     {
-        if (!CheckAllReady()) return;
+        Debug.Log("checkallready 2");
 
-        foreach (var conn in NetworkServer.connections.Values)
-        {
-            var player = conn.identity.GetComponent<PlayerSetup>();
-            if (player != null)
-            {
-                player.RunInGameStartPlayer(); // this should be a [ClientRpc]
-            }
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerSetup>().RunInGameStartPlayer();
     }
 }

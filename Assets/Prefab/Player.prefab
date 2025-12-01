@@ -764,8 +764,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   cameraPrefab: {fileID: 1802963642506761964, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
-  lobbyManager: {fileID: 1575915995478779739, guid: 3628061843055614098c3acfd43068e7, type: 3}
   playerHead: {fileID: 2053464284551581684}
+  lobbyManager: {fileID: 8859223129905925317, guid: 3628061843055614098c3acfd43068e7, type: 3}
   playerMovement: {fileID: 0}
 --- !u!114 &8667442603188165892
 MonoBehaviour:

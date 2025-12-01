@@ -19,6 +19,7 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartClient()
     {
         //lobbyManager = FindFirstObjectByType<LobbyManager>();
+        lobbyManager = GetComponent<PlayerSetup>().lobbyManager;
     }
 
     public void ToggleReady()
@@ -32,15 +33,10 @@ public class PlayerManager : NetworkBehaviour
     void CmdToggleReady()
     {
         ready = !ready;
-
-        // manually update host UI immediately
-        if (isServer)
-            OnReadyChanged(ready, !ready); // call hook manually
     }
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
-        lobbyManager = FindFirstObjectByType<LobbyManager>().GetComponent<LobbyManager>();
         if (lobbyManager != null)
             lobbyManager.UpdateLobbyText();
         else

@@ -6,8 +6,8 @@ using Mirror.Examples.AdditiveLevels;
 public class PlayerSetup : NetworkBehaviour
 {
     public GameObject cameraPrefab;
-    public GameObject lobbyManager;
     public GameObject playerHead;
+    public LobbyManager lobbyManager;
     public PlayerMovement playerMovement;
 
     private CinemachineCamera cinemaCam;
@@ -15,9 +15,8 @@ public class PlayerSetup : NetworkBehaviour
     private GameObject menuCanvas;
     public override void OnStartLocalPlayer()
     {
-        Instantiate(lobbyManager);
+        lobbyManager = Instantiate(lobbyManager);
     }
-    [ClientRpc]
     public void RunInGameStartPlayer()
     {
         //Game Starts Logic
