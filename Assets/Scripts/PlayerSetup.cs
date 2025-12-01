@@ -6,6 +6,7 @@ using Mirror.Examples.AdditiveLevels;
 public class PlayerSetup : NetworkBehaviour
 {
     public GameObject cameraPrefab;
+    public GameObject lobbyManager;
     public GameObject playerHead;
     public PlayerMovement playerMovement;
 
@@ -14,7 +15,7 @@ public class PlayerSetup : NetworkBehaviour
     private GameObject menuCanvas;
     public override void OnStartLocalPlayer()
     {
-
+        Instantiate(lobbyManager);
     }
     [ClientRpc]
     public void RunInGameStartPlayer()

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Mirror;
 using TMPro;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : NetworkBehaviour
 {
     public Button ReadyButton;
     public Button StartButton;
@@ -14,25 +14,27 @@ public class LobbyManager : MonoBehaviour
     public TMP_Text p1Text;
     public TMP_Text p2Text;
 
-    private PlayerManager playerManager;
+    public PlayerManager playerManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ReadyButton = GameObject.Find("Canvas/LobbyMenu/Ready").GetComponent<Button>();
+        StartButton = GameObject.Find("Canvas/LobbyMenu/Start").GetComponent<Button>();
+        SwapRoleButton = GameObject.Find("Canvas/LobbyMenu/Swap Role").GetComponent<Button>();
+        InviteButton = GameObject.Find("Canvas/LobbyMenu/Invite").GetComponent<Button>();
+        QuitButton = GameObject.Find("Canvas/LobbyMenu/Quit").GetComponent<Button>();
+
+        p1Text = GameObject.Find("Canvas/LobbyMenu/Player1Text").GetComponent<TMP_Text>();
+        p2Text = GameObject.Find("Canvas/LobbyMenu/Player2Text").GetComponent<TMP_Text>();
+
+
+
         ReadyButton.onClick.AddListener(ReadyButtonPressed);
         StartButton.onClick.AddListener(StartButtonPressed);
-        //InviteButton.onClick.AddListener(InviteButtonPressed);
-        //QuitButton.onClick.AddListener(QuitButtonPressed);
-        //SwapRoleButton.onClick.AddListener(SwapRoleButtonPressed);
+
+        playerManager = NetworkClient.localPlayer.GetComponent<PlayerManager>();
     }
 
-    //This is called when playerManager loads in!
-    public void SetLocalPlayerManager(PlayerManager player)
-    {
-        playerManager = player;
-        if (playerManager != null) Debug.Log("playerManager is set!!!");
-
-        //UpdateLobbyText();
-    }
     void ReadyButtonPressed()
     {
         playerManager.ToggleReady();
@@ -42,7 +44,7 @@ public class LobbyManager : MonoBehaviour
     {
         if (!playerManager.isLocalPlayer) return;
 
-        playerManager.CmdRequestStartGame();
+        //playerManager.CmdRequestStartGame();
     }
 
     public void UpdateLobbyText()
@@ -76,4 +78,21 @@ public class LobbyManager : MonoBehaviour
         if (p2 != null)
             p2Text.text = $"Ready: {p2.ready}";
     }
+
+    //Host Logic Start Lobby ( I know it should be in lobby manager)...
+    //[Command]
+    //public void CmdRequestStartGame()
+    //{
+    //    if (!isServer) return;
+    //    if (!CheckAllReady()) return;
+
+    //    foreach (var conn in NetworkServer.connections.Values)
+    //    {
+    //        var player = conn.identity.GetComponent<PlayerSetup>();
+    //        if (player != null)
+    //        {
+    //            player.RunInGameStartPlayer(); // this should be a [ClientRpc]
+    //        }
+    //    }
+    //}
 }

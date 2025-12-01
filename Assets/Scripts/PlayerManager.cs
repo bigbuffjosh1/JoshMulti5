@@ -18,10 +18,7 @@ public class PlayerManager : NetworkBehaviour
     }
     public override void OnStartClient()
     {
-        lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
-        if (lobbyManager != null) Debug.Log("Found lobby Manager!");
-        lobbyManager.SetLocalPlayerManager(this);
-        Debug.Log("after");
+        //lobbyManager = FindFirstObjectByType<LobbyManager>();
     }
 
     public void ToggleReady()
@@ -43,6 +40,7 @@ public class PlayerManager : NetworkBehaviour
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
+        lobbyManager = FindFirstObjectByType<LobbyManager>().GetComponent<LobbyManager>();
         if (lobbyManager != null)
             lobbyManager.UpdateLobbyText();
         else
@@ -59,20 +57,4 @@ public class PlayerManager : NetworkBehaviour
         return true;
     }
     
-    //Host Logic Start Lobby ( I know it should be in lobby manager)...
-    [Command]
-    public void CmdRequestStartGame()
-    {
-        if (!isServer) return;
-        if (!CheckAllReady()) return;
-
-        foreach (var conn in NetworkServer.connections.Values)
-        {
-            var player = conn.identity.GetComponent<PlayerSetup>();
-            if (player != null)
-            {
-                player.RunInGameStartPlayer(); // this should be a [ClientRpc]
-            }
-        }
-    }
 }
