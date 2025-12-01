@@ -67,7 +67,9 @@ public class LobbyManager : NetworkBehaviour
         }
         Debug.Log("pressed 1");
         if (!CheckAllReady()) return;
-        RpcStartGame();
+
+        //StartGame
+        NetworkClient.localPlayer.GetComponent<PlayerSetup>().RunInGameStartPlayer();
     }
 
     public void UpdateLobbyText()
