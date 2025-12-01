@@ -16,7 +16,7 @@ public class PlayerManager : NetworkBehaviour
     {
         inGame = false;
     }
-    public override void OnStartLocalPlayer()
+    public override void OnStartClient()
     {
         lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
         lobbyManager.SetLocalPlayerManager(NetworkClient.localPlayer.GetComponent<PlayerManager>());
