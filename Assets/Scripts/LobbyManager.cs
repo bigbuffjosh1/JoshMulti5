@@ -1,7 +1,8 @@
+using Mirror;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Mirror;
-using TMPro;
 
 public class LobbyManager : NetworkBehaviour
 {
@@ -20,17 +21,6 @@ public class LobbyManager : NetworkBehaviour
     private PlayerManager playerManager;
     private PlayerSetup playerSetup;
 
-    public void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -60,7 +50,7 @@ public class LobbyManager : NetworkBehaviour
     void StartButtonPressed()
     {
         Debug.Log("pressed .5");
-        if (!playerSetup.isHost())
+        if (!isServer)
         {
             Debug.Log("Start button pressed on a client - ignoring");
             return;
@@ -69,39 +59,23 @@ public class LobbyManager : NetworkBehaviour
         if (!CheckAllReady()) return;
 
         //StartGame
-        NetworkClient.localPlayer.GetComponent<PlayerSetup>().RunInGameStartPlayer();
+        RpcStartGame();
     }
 
     public void UpdateLobbyText()
     {
 
-        PlayerManager p1 = null;
-        PlayerManager p2 = null;
+        var players = new List<PlayerManager>();
 
-        int connectionNumber = 0;
-        foreach (var conn in NetworkClient.spawned)
+        foreach (var spawned in NetworkClient.spawned.Values)
         {
-            var playerManager = conn.Value.GetComponent<PlayerManager>();
-
-            if (playerManager == null) Debug.Log("Player manager null line lobby manager");
-
-            if (connectionNumber == 0)
-            {
-                p1 = playerManager;
-            }
-            else if (connectionNumber == 1)
-            {
-                p2 = playerManager;
-            }
-            connectionNumber++;
-
+            var pm = spawned.GetComponent<PlayerManager>();
+            if (pm != null)
+                players.Add(pm);
         }
 
-        //Add waiting for player later if p1 | p2 ==null
-        if (p1 != null)
-            p1Text.text = $"Ready: {p1.ready}";
-        if (p2 != null)
-            p2Text.text = $"Ready: {p2.ready}";
+        if (players.Count > 0) p1Text.text = $"Ready: {players[0].ready}";
+        if (players.Count > 1) p2Text.text = $"Ready: {players[1].ready}";
     }
 
     bool CheckAllReady()

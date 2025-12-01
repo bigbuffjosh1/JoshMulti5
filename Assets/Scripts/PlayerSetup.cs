@@ -13,10 +13,6 @@ public class PlayerSetup : NetworkBehaviour
     private CinemachineCamera cinemaCam;
     private GameObject sceneCamera;
     private GameObject menuCanvas;
-    public override void OnStartLocalPlayer()
-    {
-        lobbyManager = Instantiate(lobbyManager);
-    }
 
     public bool isHost()
     {

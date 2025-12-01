@@ -950,6 +950,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 1802963642506761964, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
   - {fileID: 1575915995478779739, guid: 3628061843055614098c3acfd43068e7, type: 3}
+  - {fileID: 8152839994184158432, guid: 2efb9bd8c42bc5046abd74d2516a9a9e, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -965,6 +966,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
+  lobbyManagerPrefab: {fileID: 1575915995478779739, guid: 3628061843055614098c3acfd43068e7, type: 3}
 --- !u!1 &1096631981
 GameObject:
   m_ObjectHideFlags: 0

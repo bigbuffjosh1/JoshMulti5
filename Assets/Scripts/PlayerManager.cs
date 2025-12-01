@@ -35,7 +35,7 @@ public class PlayerManager : NetworkBehaviour
 
     void OnReadyChanged(bool oldValue, bool newValue)
     {
-        lobbyManager = LobbyManager.instance;
+        lobbyManager = FindFirstObjectByType<LobbyManager>();
         if (lobbyManager != null)
             lobbyManager.UpdateLobbyText();
         else
