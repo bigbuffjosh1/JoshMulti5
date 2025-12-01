@@ -26,6 +26,8 @@ public class PlayerManager : NetworkBehaviour
 
     public void ToggleReady()
     {
+        if (!isLocalPlayer) return;
+
         CmdToggleReady();
     }
 
