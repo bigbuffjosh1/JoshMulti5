@@ -19,7 +19,7 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         ReadyButton.onClick.AddListener(ReadyButtonPressed);
-        //StartButton.onClick.AddListener(StartButtonPressed);
+        StartButton.onClick.AddListener(StartButtonPressed);
         //InviteButton.onClick.AddListener(InviteButtonPressed);
         //QuitButton.onClick.AddListener(QuitButtonPressed);
         //SwapRoleButton.onClick.AddListener(SwapRoleButtonPressed);
@@ -35,6 +35,13 @@ public class LobbyManager : MonoBehaviour
     void ReadyButtonPressed()
     {
         playerManager.ToggleReady();
+    }
+
+    void StartButtonPressed()
+    {
+        if (!playerManager.isLocalPlayer) return;
+
+        playerManager.CmdRequestStartGame();
     }
 
     public void UpdateLobbyText()
@@ -59,6 +66,7 @@ public class LobbyManager : MonoBehaviour
                 p2 = playerManager;
             }
             connectionNumber++;
+
         }
 
         //Add waiting for player later if p1 | p2 ==null

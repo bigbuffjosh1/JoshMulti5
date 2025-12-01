@@ -1,30 +1,44 @@
 using UnityEngine;
 using Mirror;
 using Unity.Cinemachine;
+using Mirror.Examples.AdditiveLevels;
 
 public class PlayerSetup : NetworkBehaviour
 {
     public GameObject cameraPrefab;
     public GameObject playerHead;
+    public PlayerMovement playerMovement;
 
     private CinemachineCamera cinemaCam;
+    private GameObject sceneCamera;
     private GameObject menuCanvas;
     public override void OnStartLocalPlayer()
     {
+
+    }
+    [ClientRpc]
+    public void RunInGameStartPlayer()
+    {
+        //Game Starts Logic
+
+        HideMenuCanvas();
+        HideCursor();
+        HideSceneCamera();
+        SpawnInCinemaCam();
+        GetComponent<PlayerManager>().inGame = true;
+    }
+
+    void SpawnInCinemaCam()
+    {
         //Spawn in the camera prefab here!!
         GameObject cam = Instantiate(cameraPrefab);
-        cam.SetActive(false);
-
         CameraFollowPlayer(cam);
+        //cam.SetActive(true);
+    }
 
-        //Hide the menu canvas when game starts
-
-
-        //HideMenuCanvas();
-        //Also Hide Cursor
-        //HideCursor();
-        //Hide the first camera in the scene
-        //HideSceneCamera();
+    void HideSceneCamera()
+    {
+        GameObject.Find("SceneCamera").SetActive(false);
     }
 
     void CameraFollowPlayer(GameObject cam)
@@ -34,12 +48,6 @@ public class PlayerSetup : NetworkBehaviour
 
         //Assign Cam to Follow player's head in Player movement
         GetComponent<PlayerMovement>().cam = cinemaCam.transform;
-    }
-
-    void HideSceneCamera()
-    {
-        GameObject sceneCamera = GameObject.Find("SceneCamera");
-        sceneCamera.SetActive(false);
     }
 
     void HideCursor()

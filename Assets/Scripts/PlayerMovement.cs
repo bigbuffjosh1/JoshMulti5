@@ -29,9 +29,12 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        movePlayer();
-        limitVelocity();
-        updateRotation(); //rotate based on where i look
+        if (transform.GetComponent<PlayerManager>().inGame)
+        {
+            movePlayer();
+            limitVelocity();
+            updateRotation(); //rotate based on where i look
+        }
     }
 
     private void movePlayer()

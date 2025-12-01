@@ -765,6 +765,7 @@ MonoBehaviour:
   syncInterval: 0
   cameraPrefab: {fileID: 1802963642506761964, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
   playerHead: {fileID: 2053464284551581684}
+  playerMovement: {fileID: 0}
 --- !u!114 &8667442603188165892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +784,7 @@ MonoBehaviour:
   move: {fileID: -225037306854522643, guid: ecb1c7f17c6ae7b46998750399e1617c, type: 3}
   moveSpeed: 4
   joshGravity: 35
-  cam: {fileID: 5955715727467108886, guid: 512a7016775c66b418be7c627349e9cb, type: 3}
+  cam: {fileID: 0}
   rotationSpeed: 14
 --- !u!114 &-6535087353782100780
 MonoBehaviour:
@@ -797,6 +798,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab030981bf7ec8b419d8cdc9cc955aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ready: 0
 --- !u!1 &8464289904964763989
 GameObject:
