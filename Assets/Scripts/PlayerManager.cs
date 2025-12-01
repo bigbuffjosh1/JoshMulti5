@@ -35,6 +35,10 @@ public class PlayerManager : NetworkBehaviour
     void CmdToggleReady()
     {
         ready = !ready;
+
+        // manually update host UI immediately
+        if (isServer)
+            OnReadyChanged(ready, !ready); // call hook manually
     }
 
     void OnReadyChanged(bool oldValue, bool newValue)
