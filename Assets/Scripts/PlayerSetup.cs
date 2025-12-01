@@ -17,6 +17,13 @@ public class PlayerSetup : NetworkBehaviour
     {
         lobbyManager = Instantiate(lobbyManager);
     }
+
+    public bool isHost()
+    {
+        if (isServer) return true;
+        else return false;
+    }
+
     public void RunInGameStartPlayer()
     {
         //Game Starts Logic

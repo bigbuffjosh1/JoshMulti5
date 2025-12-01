@@ -59,7 +59,12 @@ public class LobbyManager : NetworkBehaviour
 
     void StartButtonPressed()
     {
-        if (!isServer) return;
+        Debug.Log("pressed .5");
+        if (!playerSetup.isHost())
+        {
+            Debug.Log("Start button pressed on a client - ignoring");
+            return;
+        }
         Debug.Log("pressed 1");
         if (!CheckAllReady()) return;
         RpcStartGame();
