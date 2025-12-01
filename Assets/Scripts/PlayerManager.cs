@@ -19,7 +19,7 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         lobbyManager = GameObject.Find("LobbyManager").GetComponent<LobbyManager>();
-        //lobbyManager.SetLocalPlayerManager(this);
+        lobbyManager.SetLocalPlayerManager(NetworkClient.localPlayer.GetComponent<PlayerManager>());
     }
 
     public void ToggleReady()
