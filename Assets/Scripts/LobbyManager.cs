@@ -29,6 +29,7 @@ public class LobbyManager : MonoBehaviour
     public void SetLocalPlayerManager(PlayerManager player)
     {
         playerManager = player;
+        if (playerManager != null) Debug.Log("playerManager is set!!!");
 
         //UpdateLobbyText();
     }
