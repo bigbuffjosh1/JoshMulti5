@@ -30,7 +30,7 @@ public class LobbyManager : MonoBehaviour
     {
         playerManager = player;
 
-        UpdateLobbyText();
+        //UpdateLobbyText();
     }
     void ReadyButtonPressed()
     {
@@ -51,28 +51,30 @@ public class LobbyManager : MonoBehaviour
         PlayerManager p2 = null;
 
         int connectionNumber = 0;
-        foreach (var conn in NetworkClient.spawned)
-        {
-            var playerManager = conn.Value.GetComponent<PlayerManager>();
+        //foreach (var conn in NetworkClient.spawned)
+        //{
+        //    var playerManager = conn.Value.GetComponent<PlayerManager>();
 
-            if (playerManager == null) Debug.Log("Player manager null line lobby manager") ;
+        //    if (playerManager == null) Debug.Log("Player manager null line lobby manager") ;
 
-            if (connectionNumber == 0)
-            {
-                p1 = playerManager;
-            }
-            else if(connectionNumber == 1)
-            {
-                p2 = playerManager;
-            }
-            connectionNumber++;
+        //    if (connectionNumber == 0)
+        //    {
+        //        p1 = playerManager;
+        //    }
+        //    else if(connectionNumber == 1)
+        //    {
+        //        p2 = playerManager;
+        //    }
+        //    connectionNumber++;
 
-        }
+        //}
 
-        //Add waiting for player later if p1 | p2 ==null
-        if(p1 != null )
-            p1Text.text = $"Ready: {p1.ready}";
-        if(p2 != null)
-            p2Text.text = $"Ready: {p2.ready}";
+        ////Add waiting for player later if p1 | p2 ==null
+        //if(p1 != null )
+        //    p1Text.text = $"Ready: {p1.ready}";
+        //if(p2 != null)
+        //    p2Text.text = $"Ready: {p2.ready}";
+        p1Text.text = $"HOST HIT READY1";
+        p2Text.text = $"HOST HIT READY2";
     }
 }
