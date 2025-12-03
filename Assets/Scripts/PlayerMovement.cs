@@ -1,9 +1,13 @@
-using UnityEngine;
 using Mirror;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Movement")]
     public InputActionReference move;
     public float moveSpeed = 4f;
@@ -34,6 +38,7 @@ public class PlayerMovement : NetworkBehaviour
             movePlayer();
             limitVelocity();
             updateRotation(); //rotate based on where i look
+            UpdateAnimation();
         }
     }
 
@@ -50,6 +55,18 @@ public class PlayerMovement : NetworkBehaviour
 
         //extra gravity maybe i found out why later
         rb.AddForce(Vector3.down * joshGravity, ForceMode.Acceleration);
+    }
+
+    void UpdateAnimation()
+    {
+        if(rb.linearVelocity.magnitude > 0.1f)
+        {
+            animator.Play("running");
+        }
+        else
+        {
+            animator.Play("Idle");
+        }
     }
 
     private void limitVelocity()

@@ -56,6 +56,7 @@ public class LobbyManager : NetworkBehaviour
             return;
         }
         Debug.Log("pressed 1");
+
         if (!CheckAllReady()) return;
 
         //StartGame

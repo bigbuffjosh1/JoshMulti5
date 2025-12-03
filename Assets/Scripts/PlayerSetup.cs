@@ -50,7 +50,8 @@ public class PlayerSetup : NetworkBehaviour
         cinemaCam.Follow = playerHead.transform;
 
         //Assign Cam to Follow player's head in Player movement
-        GetComponent<PlayerMovement>().cam = cinemaCam.transform;
+        //GetComponent<PlayerMovement>().cam = cinemaCam.transform;
+        playerMovement.cam = cinemaCam.transform;
     }
 
     void HideCursor()
